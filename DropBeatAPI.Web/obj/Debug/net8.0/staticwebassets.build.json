@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "Hit6cZ8dC+W09Pe0a+S/Q9PJwMM61/tMV/AJvU2zCKk=",
+  "Source": "DropBeatAPI.Web",
+  "BasePath": "_content/DropBeatAPI.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "DropBeatAPI.Web\\wwwroot",
+      "Source": "DropBeatAPI.Web",
+      "ContentRoot": "C:\\diplom\\diplomweb\\DropBeatAPI.Web\\wwwroot\\",
+      "BasePath": "_content/DropBeatAPI.Web",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\diplom\\diplomweb\\DropBeatAPI.Web\\wwwroot\\audios\\watermark.mp3",
+      "SourceId": "DropBeatAPI.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\diplom\\diplomweb\\DropBeatAPI.Web\\wwwroot\\",
+      "BasePath": "_content/DropBeatAPI.Web",
+      "RelativePath": "audios/watermark.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\audios\\watermark.mp3"
+    }
+  ]
+}

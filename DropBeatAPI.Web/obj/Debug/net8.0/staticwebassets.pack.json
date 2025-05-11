@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\diplom\\diplomweb\\DropBeatAPI.Web\\wwwroot\\audios\\watermark.mp3",
+      "PackagePath": "staticwebassets\\audios\\watermark.mp3"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DropBeatAPI.Web.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.DropBeatAPI.Web.props",
+      "PackagePath": "build\\DropBeatAPI.Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.DropBeatAPI.Web.props",
+      "PackagePath": "buildMultiTargeting\\DropBeatAPI.Web.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.DropBeatAPI.Web.props",
+      "PackagePath": "buildTransitive\\DropBeatAPI.Web.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
