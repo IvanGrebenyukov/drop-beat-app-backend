@@ -28,12 +28,13 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IBeatService, BeatService>();
 builder.Services.AddScoped<IBeatLikeService, BeatLikeService>();
 builder.Services.AddScoped<IFollowService, FollowService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
-// Добавляем контекст БД
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 builder.Services.AddDbContext<BeatsDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Настройка Identity
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Identity
 builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 {
     options.SignIn.RequireConfirmedAccount = true;
@@ -44,7 +45,7 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 .AddEntityFrameworkStores<BeatsDbContext>()
 .AddDefaultTokenProviders();
 
-// Настройка JWT
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ JWT
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -76,7 +77,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Введите токен в формате: Bearer {token}"
+        Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: Bearer {token}"
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -110,10 +111,10 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection();
 
 app.UseCors(builder => builder
-    .WithOrigins("http://localhost:3000") // Явно указываем фронтенд
+    .WithOrigins("http://localhost:3000") // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     .AllowAnyMethod()
     .AllowAnyHeader()
-    .AllowCredentials()); // Для работы с куки/авторизацией
+    .AllowCredentials()); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 app.UseAuthentication();
 app.UseAuthorization();

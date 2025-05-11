@@ -19,7 +19,6 @@ namespace DropBeatAPI.Core.Entities
         public bool IsAvailable { get; set; } = true;
         public string AudioKey { get; set; } = string.Empty;
         public string CoverUrl { get; set; } = string.Empty;
-        public string LicenseUrl { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         // Навигационные свойства

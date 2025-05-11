@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DropBeatAPI.Core.DTOs.Documents;
 
 namespace DropBeatAPI.Infrastructure.Services
 {
@@ -20,14 +19,12 @@ namespace DropBeatAPI.Infrastructure.Services
         private readonly BeatsDbContext _context;
         private readonly YandexStorageService _storageService;
         private readonly WatermarkService _watermarkService;
-        private LicenseService _licenseService;
 
-        public BeatService(BeatsDbContext context, YandexStorageService storageService, WatermarkService watermarkService, LicenseService licenseService)
+        public BeatService(BeatsDbContext context, YandexStorageService storageService, WatermarkService watermarkService)
         {
             _context = context;
             _storageService = storageService;
             _watermarkService = watermarkService;
-            _licenseService = licenseService;
         }
 
         public async Task<Guid> AddBeatAsync(CreateBeatDto dto, Guid sellerId)
@@ -47,26 +44,6 @@ namespace DropBeatAPI.Infrastructure.Services
                 throw new ArgumentException("Цена должна быть от 500 до 20000 с шагом 500.");
 
             var beatId = Guid.NewGuid();
-            var licenseDto = new LicenseDocumentDto
-            {
-                BeatId = beatId,
-                Title = dto.Title,
-                SellerName = (await _context.Users.FindAsync(sellerId))?.StageName ?? "Неизвестно",
-                LicenseType = dto.LicenseType,
-                CreatedAt = DateTime.UtcNow
-            };
-            
-            // Генерация PDF лицензии
-            var licenseStream = await _licenseService.GenerateLicensePdfAsync(licenseDto);
-
-            // Загрузка лицензии в Object Storage
-            var licenseKey = await _storageService.UploadFileAsync(
-                licenseStream, 
-                $"{beatId}.pdf", 
-                "application/pdf", 
-                "licenses"
-            );
-            
             var originalKey = await _storageService.UploadFileAsync(dto.AudioFile, $"{beatId}.mp3", "audio/mpeg", "audios/original");
             var demoStream = await _watermarkService.AddWatermarkAsync(dto.AudioFile);
             var demoKey = await _storageService.UploadFileAsync(demoStream, $"{beatId}.mp3", "audio/mpeg", "audios/demo");
@@ -88,7 +65,6 @@ namespace DropBeatAPI.Infrastructure.Services
                 LicenseType = dto.LicenseType,
                 AudioKey = demoKey,
                 CoverUrl = coverKey,
-                LicenseUrl = licenseKey,
                 SellerId = sellerId
             };
 
