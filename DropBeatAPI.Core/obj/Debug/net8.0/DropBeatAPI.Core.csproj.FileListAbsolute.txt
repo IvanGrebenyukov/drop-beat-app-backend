@@ -44,3 +44,4 @@ C:\diplom\diplomweb\DropBeatAPI.Core\obj\Debug\net8.0\refint\DropBeatAPI.Core.dl
 C:\diplom\diplomweb\DropBeatAPI.Core\obj\Debug\net8.0\DropBeatAPI.Core.pdb
 C:\diplom\diplomweb\DropBeatAPI.Core\obj\Debug\net8.0\DropBeatAPI.Core.genruntimeconfig.cache
 C:\diplom\diplomweb\DropBeatAPI.Core\obj\Debug\net8.0\ref\DropBeatAPI.Core.dll
+C:\diplom\diplomweb\DropBeatAPI.Core\obj\Debug\net8.0\DropBeatAPI.Core.sourcelink.json

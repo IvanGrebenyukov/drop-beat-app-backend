@@ -95,6 +95,7 @@ namespace DropBeatAPI.Infrastructure.Services
         {
             return await _context.Beats
                 .Include(b => b.Seller)
+                .Where(b => b.IsAvailable)
                 .Select(b => new ShortBeatDto
                 {
                     Id = b.Id,
@@ -121,6 +122,7 @@ namespace DropBeatAPI.Infrastructure.Services
                 BPM = beat.BPM,
                 SellerName = beat.Seller.StageName,
                 SellerId = beat.Seller.Id,
+                IsAvailable = beat.IsAvailable,
                 AudioKeyDemo = beat.AudioKey,
                 CoverUrl = !string.IsNullOrEmpty(beat.CoverUrl) ? beat.CoverUrl : ""
             };
@@ -268,6 +270,7 @@ namespace DropBeatAPI.Infrastructure.Services
                 .Include(b => b.Tags)
                 .Include(b => b.Genres)
                 .Include(b => b.Moods)
+                .Where(b => b.IsAvailable)
                 .AsQueryable();
 
             // Фильтр по названию (если строка не пустая)

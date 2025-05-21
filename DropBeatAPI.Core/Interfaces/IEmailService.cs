@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DropBeatAPI.Core.DTOs.Payment;
 
 namespace DropBeatAPI.Core.Interfaces
 {
     public interface IEmailService
     {
         Task SendConfirmationEmail(string email, string code);
+        Task SendPurchaseEmail(PurchaseEmailDto dto);
     }
 }

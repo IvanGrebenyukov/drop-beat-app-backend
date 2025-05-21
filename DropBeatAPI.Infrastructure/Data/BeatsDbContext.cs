@@ -33,6 +33,10 @@ namespace DropBeatAPI.Infrastructure.Data
         public DbSet<EmailConfirmationCode> EmailConfirmationCodes { get; set; }
         public DbSet<SellerRequest> SellerRequests { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<UserChat> UserChats { get; set; }
+        public DbSet<UserBlock> UserBlocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -227,6 +231,74 @@ namespace DropBeatAPI.Infrastructure.Data
                         .HasForeignKey<Purchase>(p => p.TransactionId)  // Указываем связь по `TransactionId`
                         .OnDelete(DeleteBehavior.SetNull);
             });
+            
+            // Chat
+            modelBuilder.Entity<Chat>(c =>
+            {
+                c.HasKey(x => x.Id);
+
+                c.Property(x => x.Type)
+                    .HasConversion<string>() // Для читаемости в базе
+                    .HasMaxLength(20);
+
+                c.HasOne(c => c.Genre)
+                    .WithMany()
+                    .HasForeignKey(c => c.GenreId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+// UserChat (связь между пользователями и чатами)
+            modelBuilder.Entity<UserChat>()
+                .HasKey(uc => new { uc.ChatId, uc.UserId });
+
+            modelBuilder.Entity<UserChat>()
+                .HasOne(uc => uc.Chat)
+                .WithMany(c => c.Participants)
+                .HasForeignKey(uc => uc.ChatId);
+
+            modelBuilder.Entity<UserChat>()
+                .HasOne(uc => uc.User)
+                .WithMany(u => u.UserChats)
+                .HasForeignKey(uc => uc.UserId);
+
+// Message
+            modelBuilder.Entity<Message>(m =>
+            {
+                m.HasKey(x => x.Id);
+
+                m.HasOne(m => m.Chat)
+                    .WithMany(c => c.Messages)
+                    .HasForeignKey(m => m.ChatId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                m.HasOne(m => m.Sender)
+                    .WithMany(u => u.Messages)
+                    .HasForeignKey(m => m.SenderId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                m.Property(m => m.Text)
+                    .IsRequired()
+                    .HasMaxLength(2000);
+            });
+
+// UserBlock
+            modelBuilder.Entity<UserBlock>()
+                .HasKey(b => new { b.BlockerId, b.BlockedId });
+
+            modelBuilder.Entity<UserBlock>()
+                .HasOne(b => b.Blocker)
+                .WithMany(u => u.BlockedUsers)
+                .HasForeignKey(b => b.BlockerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserBlock>()
+                .HasOne(b => b.Blocked)
+                .WithMany(u => u.BlockedByUsers)
+                .HasForeignKey(b => b.BlockedId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            
+            
         }
     }
 

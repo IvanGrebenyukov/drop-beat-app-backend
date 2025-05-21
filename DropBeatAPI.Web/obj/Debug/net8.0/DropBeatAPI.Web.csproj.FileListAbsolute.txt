@@ -423,3 +423,11 @@ C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\ICSharpCode.SharpZipLib.dll
 C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\SixLabors.Fonts.dll
 C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\SixLabors.ImageSharp.dll
 C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\de\PdfSharpCore.resources.dll
+C:\diplom\diplomweb\DropBeatAPI.Web\obj\Debug\net8.0\DropBeatAPI.Web.sourcelink.json
+C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\MailKit.dll
+C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\MimeKit.dll
+C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\RestSharp.dll
+C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\diplom\diplomweb\DropBeatAPI.Web\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

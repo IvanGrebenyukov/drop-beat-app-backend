@@ -51,6 +51,10 @@
               "target": "Package",
               "version": "[12.0.0, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.12.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.13, )"
@@ -85,6 +89,10 @@
               "target": "Package",
               "version": "[1.4.0, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.11, )"
@@ -92,6 +100,10 @@
             "PdfSharpCore": {
               "target": "Package",
               "version": "[1.3.67, )"
+            },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[112.1.1-alpha.0.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -114,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.409/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

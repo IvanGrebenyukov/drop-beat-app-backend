@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DropBeatAPI.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace DropBeatAPI.Infrastructure.Services
 {
-    public class YandexStorageService
+    public class YandexStorageService : IYandexStorageService
     {
         private readonly IAmazonS3 _s3Client;
         private readonly string _bucketName;
@@ -24,6 +25,22 @@ namespace DropBeatAPI.Infrastructure.Services
                 ServiceURL = "https://storage.yandexcloud.net",
                 ForcePathStyle = true
             });
+        }
+        
+        public async Task<Stream?> GetFileAsync(string fileKey)
+        {
+            try
+            {
+                var response = await _s3Client.GetObjectAsync(_bucketName, fileKey);
+                var memoryStream = new MemoryStream();
+                await response.ResponseStream.CopyToAsync(memoryStream);
+                memoryStream.Position = 0;
+                return memoryStream;
+            }
+            catch (AmazonS3Exception)
+            {
+                return null;
+            }
         }
 
         public async Task<string> UploadFileAsync(IFormFile file, string fileName, string contentType, string folder)
@@ -74,6 +91,31 @@ namespace DropBeatAPI.Infrastructure.Services
             {
                 throw new Exception($"Ошибка удаления файла: {ex.Message}");
             }
+        }
+        
+        public async Task<IEnumerable<string>> ListFilesAsync(string prefix)
+        {
+            var keys = new List<string>();
+            string continuationToken = null;
+
+            do
+            {
+                var request = new ListObjectsV2Request
+                {
+                    BucketName = _bucketName,
+                    Prefix = prefix,
+                    ContinuationToken = continuationToken
+                };
+
+                var response = await _s3Client.ListObjectsV2Async(request);
+
+                keys.AddRange(response.S3Objects.Select(o => o.Key));
+
+                continuationToken = response.IsTruncated ? response.NextContinuationToken : null;
+
+            } while (continuationToken != null);
+
+            return keys;
         }
     }
 }

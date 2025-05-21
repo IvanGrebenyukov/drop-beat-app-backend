@@ -29,6 +29,9 @@ builder.Services.AddScoped<IBeatService, BeatService>();
 builder.Services.AddScoped<IBeatLikeService, BeatLikeService>();
 builder.Services.AddScoped<IFollowService, FollowService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IYandexStorageService, YandexStorageService>();
 
 // ��������� �������� ��
 builder.Services.AddDbContext<BeatsDbContext>(options =>
@@ -126,6 +129,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<BeatsDbContext>();
+    var seeder = new ChatSeeder(db);
+    await seeder.SeedGenreChatsAsync();
+}
 
 app.Run();
 

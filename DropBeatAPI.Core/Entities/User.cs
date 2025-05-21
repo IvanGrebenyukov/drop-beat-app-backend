@@ -37,6 +37,11 @@ namespace DropBeatAPI.Core.Entities
         public ICollection<UserGenre> UserGenres { get; set; } = new List<UserGenre>();
         public ICollection<SellerRequest> SellerRequests { get; set; } = new List<SellerRequest>();
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public ICollection<UserChat> UserChats { get; set; } = new List<UserChat>();
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
+        public ICollection<UserBlock> BlockedUsers { get; set; } = new List<UserBlock>();
+        public ICollection<UserBlock> BlockedByUsers { get; set; } = new List<UserBlock>();
+
     }
 
     public enum SellerRequestStatus

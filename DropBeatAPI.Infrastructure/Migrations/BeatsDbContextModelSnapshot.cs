@@ -176,6 +176,27 @@ namespace DropBeatAPI.Infrastructure.Migrations
                     b.ToTable("CartItems");
                 });
 
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.Chat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("GenreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("Chats");
+                });
+
             modelBuilder.Entity("DropBeatAPI.Core.Entities.EmailConfirmationCode", b =>
                 {
                     b.Property<Guid>("Id")
@@ -237,6 +258,35 @@ namespace DropBeatAPI.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.Message", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ChatId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("DropBeatAPI.Core.Entities.Mood", b =>
@@ -517,6 +567,39 @@ namespace DropBeatAPI.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.UserBlock", b =>
+                {
+                    b.Property<Guid>("BlockerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BlockedId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("BlockerId", "BlockedId");
+
+                    b.HasIndex("BlockedId");
+
+                    b.ToTable("UserBlocks");
+                });
+
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.UserChat", b =>
+                {
+                    b.Property<Guid>("ChatId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ChatId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserChats");
                 });
 
             modelBuilder.Entity("DropBeatAPI.Core.Entities.UserGenre", b =>
@@ -805,6 +888,16 @@ namespace DropBeatAPI.Infrastructure.Migrations
                     b.Navigation("Cart");
                 });
 
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.Chat", b =>
+                {
+                    b.HasOne("DropBeatAPI.Core.Entities.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Genre");
+                });
+
             modelBuilder.Entity("DropBeatAPI.Core.Entities.EmailConfirmationCode", b =>
                 {
                     b.HasOne("DropBeatAPI.Core.Entities.User", "User")
@@ -833,6 +926,25 @@ namespace DropBeatAPI.Infrastructure.Migrations
                     b.Navigation("Follower");
 
                     b.Navigation("Following");
+                });
+
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.Message", b =>
+                {
+                    b.HasOne("DropBeatAPI.Core.Entities.Chat", "Chat")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DropBeatAPI.Core.Entities.User", "Sender")
+                        .WithMany("Messages")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Chat");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("DropBeatAPI.Core.Entities.Purchase", b =>
@@ -903,6 +1015,44 @@ namespace DropBeatAPI.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.UserBlock", b =>
+                {
+                    b.HasOne("DropBeatAPI.Core.Entities.User", "Blocked")
+                        .WithMany("BlockedByUsers")
+                        .HasForeignKey("BlockedId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DropBeatAPI.Core.Entities.User", "Blocker")
+                        .WithMany("BlockedUsers")
+                        .HasForeignKey("BlockerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Blocked");
+
+                    b.Navigation("Blocker");
+                });
+
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.UserChat", b =>
+                {
+                    b.HasOne("DropBeatAPI.Core.Entities.Chat", "Chat")
+                        .WithMany("Participants")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DropBeatAPI.Core.Entities.User", "User")
+                        .WithMany("UserChats")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chat");
 
                     b.Navigation("User");
                 });
@@ -1008,6 +1158,13 @@ namespace DropBeatAPI.Infrastructure.Migrations
                     b.Navigation("Items");
                 });
 
+            modelBuilder.Entity("DropBeatAPI.Core.Entities.Chat", b =>
+                {
+                    b.Navigation("Messages");
+
+                    b.Navigation("Participants");
+                });
+
             modelBuilder.Entity("DropBeatAPI.Core.Entities.Genre", b =>
                 {
                     b.Navigation("BeatGenres");
@@ -1034,6 +1191,10 @@ namespace DropBeatAPI.Infrastructure.Migrations
                 {
                     b.Navigation("Beats");
 
+                    b.Navigation("BlockedByUsers");
+
+                    b.Navigation("BlockedUsers");
+
                     b.Navigation("Carts");
 
                     b.Navigation("Followers");
@@ -1041,6 +1202,8 @@ namespace DropBeatAPI.Infrastructure.Migrations
                     b.Navigation("Following");
 
                     b.Navigation("LikedBeats");
+
+                    b.Navigation("Messages");
 
                     b.Navigation("Purchases");
 
@@ -1055,6 +1218,8 @@ namespace DropBeatAPI.Infrastructure.Migrations
                     b.Navigation("SocialLinks");
 
                     b.Navigation("Transactions");
+
+                    b.Navigation("UserChats");
 
                     b.Navigation("UserGenres");
                 });

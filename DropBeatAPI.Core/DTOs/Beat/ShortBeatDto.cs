@@ -15,6 +15,7 @@ namespace DropBeatAPI.Core.DTOs.Beat
         public string SellerName { get; set; } = string.Empty;
         public Guid SellerId { get; set; }
         public string? CoverUrl { get; set; }
+        public bool IsAvailable { get; set; }
         public string AudioKeyDemo { get; set; } = string.Empty;
     }
 }
