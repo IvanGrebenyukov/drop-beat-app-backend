@@ -15,5 +15,5 @@ namespace DropBeatAPI.Core.Entities
         public string Url { get; set; } = string.Empty;
     }
 
-    public enum SocialPlatform { Vk, YouTube, Instagram, TikTok, SoundCloud }
+    public enum SocialPlatform { Vk, YouTube, Telegram, TikTok, SoundCloud }
 }

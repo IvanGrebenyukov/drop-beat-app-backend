@@ -9,6 +9,7 @@
       "DropBeatAPI.Web/1.0.0": {
         "dependencies": {
           "AWSSDK.S3": "3.7.415.7",
+          "AutoMapper": "14.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "DropBeatAPI.Infrastructure": "1.0.0",
           "MailKit": "4.12.0",
@@ -31,20 +32,20 @@
           "DropBeatAPI.Web.dll": {}
         }
       },
-      "AutoMapper/12.0.0": {
+      "AutoMapper/14.0.0": {
         "dependencies": {
-          "Microsoft.CSharp": "4.7.0"
+          "Microsoft.Extensions.Options": "8.0.2"
         },
         "runtime": {
-          "lib/netstandard2.1/AutoMapper.dll": {
-            "assemblyVersion": "12.0.0.0",
-            "fileVersion": "12.0.0.0"
+          "lib/net8.0/AutoMapper.dll": {
+            "assemblyVersion": "14.0.0.0",
+            "fileVersion": "14.0.0.0"
           }
         }
       },
       "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.0": {
         "dependencies": {
-          "AutoMapper": "12.0.0",
+          "AutoMapper": "14.0.0",
           "Microsoft.Extensions.Options": "8.0.2"
         },
         "runtime": {
@@ -383,7 +384,6 @@
           }
         }
       },
-      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.EntityFrameworkCore/8.0.13": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Abstractions": "8.0.13",
@@ -999,6 +999,7 @@
       "DropBeatAPI.Core/1.0.0": {
         "dependencies": {
           "AWSSDK.S3": "3.7.415.7",
+          "AutoMapper": "14.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "MailKit": "4.12.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.13",
@@ -1024,6 +1025,7 @@
       "DropBeatAPI.Infrastructure/1.0.0": {
         "dependencies": {
           "AWSSDK.S3": "3.7.415.7",
+          "AutoMapper": "14.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "DropBeatAPI.Core": "1.0.0",
           "MailKit": "4.12.0",
@@ -1055,12 +1057,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AutoMapper/12.0.0": {
+    "AutoMapper/14.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0Rmg0zI5AFu1O/y//o9VGyhxKjhggWpk9mOA1tp0DEVx40c61bs+lnQv+0jUq8XbniF7FKgIVvI1perqiMtLrA==",
-      "path": "automapper/12.0.0",
-      "hashPath": "automapper.12.0.0.nupkg.sha512"
+      "sha512": "sha512-OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
+      "path": "automapper/14.0.0",
+      "hashPath": "automapper.14.0.0.nupkg.sha512"
     },
     "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.0": {
       "type": "package",
@@ -1180,13 +1182,6 @@
       "sha512": "sha512-l4dDRmGELXG72XZaonnOeORyD/T5RpEu5LGHOUIhnv+MmUWDY/m1kWXGwtcgQ5CJ5ynkFiRnIYzTKXYjUs7rbw==",
       "path": "microsoft.codeanalysis.workspaces.common/4.5.0",
       "hashPath": "microsoft.codeanalysis.workspaces.common.4.5.0.nupkg.sha512"
-    },
-    "Microsoft.CSharp/4.7.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
-      "path": "microsoft.csharp/4.7.0",
-      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/8.0.13": {
       "type": "package",

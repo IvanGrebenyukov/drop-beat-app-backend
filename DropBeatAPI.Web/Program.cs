@@ -18,7 +18,6 @@ builder.Services.AddSingleton<YandexStorageService>();
 
 builder.Services.AddControllers();
 
-
 builder.Services.AddScoped<WatermarkService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -32,6 +31,8 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IYandexStorageService, YandexStorageService>();
+builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddSignalR();
 
 // ��������� �������� ��
 builder.Services.AddDbContext<BeatsDbContext>(options =>
@@ -104,6 +105,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -114,10 +116,10 @@ if (app.Environment.IsDevelopment())
 //app.UseHttpsRedirection();
 
 app.UseCors(builder => builder
-    .WithOrigins("http://localhost:3000") // ���� ��������� ��������
+    .WithOrigins("http://localhost:3000") 
     .AllowAnyMethod()
     .AllowAnyHeader()
-    .AllowCredentials()); // ��� ������ � ����/������������
+    .AllowCredentials()); 
 
 app.UseAuthentication();
 app.UseAuthorization();
