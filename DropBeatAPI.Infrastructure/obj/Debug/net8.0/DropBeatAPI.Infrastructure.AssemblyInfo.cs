@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DropBeatAPI.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a575394ecc3f4f59afed24596ef912244c065a18")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74e91710d13ea4f9aa7d4938ceb176c4bbb70c82")]
 [assembly: System.Reflection.AssemblyProductAttribute("DropBeatAPI.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DropBeatAPI.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -32,6 +32,7 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IYandexStorageService, YandexStorageService>();
 builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddScoped<ISaleService, SaleService>();
 builder.Services.AddSignalR();
 
 // ��������� �������� ��
